@@ -1,6 +1,6 @@
 ﻿namespace URLShortenService.Models
 {
-	public class UrlResponseDto
+	public class UrlResponse
 	{
 		public string Id { get; set; }
 		public string OriginalUrl { get; set; }

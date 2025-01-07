@@ -16,7 +16,7 @@ namespace URLShortenService.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(CreateUrlDto createUrl)
+		public async Task<IActionResult> Create(CreateUrlRequest createUrl)
 		{
 			// Check if the URL is valid
 			if (string.IsNullOrEmpty(createUrl.OriginalUrl) || !Uri.IsWellFormedUriString(createUrl.OriginalUrl, UriKind.Absolute))
@@ -35,7 +35,7 @@ namespace URLShortenService.Controllers
 			};
 
 			var result = await _shortUrlService.CreateAsync(url);
-			var responseDto = new UrlResponseDto
+			var responseDto = new UrlResponse
 			{
 				Id = result.Id,
 				OriginalUrl = result.OriginalUrl,
@@ -53,7 +53,7 @@ namespace URLShortenService.Controllers
 			{
 				return NotFound();
 			}
-			var responseDto = new UrlResponseDto
+			var responseDto = new UrlResponse
 			{
 				Id = result.Id,
 				OriginalUrl = result.OriginalUrl,
@@ -64,7 +64,7 @@ namespace URLShortenService.Controllers
 			return Ok(responseDto);
 		}
 		[HttpPut("{shortUrl}")]
-		public async Task<IActionResult> Update(string shortUrl, [FromBody] CreateUrlDto updatedUrl)
+		public async Task<IActionResult> Update(string shortUrl, [FromBody] CreateUrlRequest updatedUrl)
 		{
 			// Check if the short URL exists
 			var existingUrl = await _shortUrlService.GetAsync(shortUrl);
@@ -106,7 +106,7 @@ namespace URLShortenService.Controllers
 			{
 				return NotFound();
 			}
-			var statsDto = new UrlStatsDto
+			var statsDto = new UrlStatsResponse
 			{
 				Id = result.Id,
 				ShortUrl = result.ShortUrl,

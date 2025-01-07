@@ -1,6 +1,6 @@
 ﻿namespace URLShortenService.Models
 {
-	public class CreateUrlDto
+	public class CreateUrlRequest
 	{
 		public string OriginalUrl { get; set; }
 	}
